@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Home from './pages/Home.jsx';
-import Popular from './pages/Popular.jsx';
-import Search from './pages/Search.jsx';
-import Wishlist from './pages/Wishlist.jsx';
+import Home from '../pages/Home.jsx';
+import Popular from '../pages/Popular.jsx';
+import Search from '../pages/Search.jsx';
+import Wishlist from '../pages/Wishlist.jsx';
 
 
 const App = () => {
