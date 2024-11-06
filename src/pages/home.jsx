@@ -1,36 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Banner from './Banner';
-import MovieRow from './MovieRow';
-import URLService from '../../util/movie/URL';
-import WishlistService from '../../util/movie/wishlist';
+
+import React from 'react';
+import Banner from './components/banner.jsx';
 
 const Home = () => {
-  const [featuredMovie, setFeaturedMovie] = useState(null);
-  const [popularMoviesUrl, setPopularMoviesUrl] = useState('');
-  const [newReleasesUrl, setNewReleasesUrl] = useState('');
-  const [actionMoviesUrl, setActionMoviesUrl] = useState('');
-
-  const apiKey = localStorage.getItem('TMDb-Key') || '';
-  const urlService = new URLService();
-
-  useEffect(() => {
-    setPopularMoviesUrl(urlService.getURL4PopularMovies(apiKey));
-    setNewReleasesUrl(urlService.getURL4ReleaseMovies(apiKey));
-    setActionMoviesUrl(urlService.getURL4GenreMovies(apiKey, '28'));
-    loadFeaturedMovie();
-  }, [apiKey]);
-
-  const loadFeaturedMovie = async () => {
-    const movie = await urlService.fetchFeaturedMovie(apiKey);
-    setFeaturedMovie(movie);
+  const movie = {
+    title: "엄마친구아들",
+    overview: "《갯마을 차차차》의 유제원 감독이 연출한 코미디 드라마. 인생 새출발을 위해 본가로 돌아온 여자가 옛 친구와 다시 얽히며 벌어지는 일을 그린다.",
+    backdrop_path: "/example-backdrop.jpg" // 실제 이미지 URL을 넣어주세요
   };
 
   return (
     <div className="home">
-      <Banner movie={featuredMovie} />
-      <MovieRow title="인기 영화" fetchUrl={popularMoviesUrl} />
-      <MovieRow title="최신 영화" fetchUrl={newReleasesUrl} />
-      <MovieRow title="액션 영화" fetchUrl={actionMoviesUrl} />
+      <Banner movie={movie} />
     </div>
   );
 };
