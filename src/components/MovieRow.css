@@ -1,5 +1,6 @@
 .movie-row {
     margin-bottom: 50px;
+    position: relative;
   }
   
   .movie-row h2 {
@@ -7,11 +8,19 @@
     margin-left: 20px;
   }
   
+  .movie-row__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
   .movie-row__posters {
     display: flex;
-    overflow-x: scroll;
+    overflow: hidden;
+    scroll-behavior: smooth;
     padding: 20px 0;
     gap: 10px;
+    width: 100%;
   }
   
   .movie-row__poster {
@@ -23,5 +32,29 @@
   
   .movie-row__poster:hover {
     transform: scale(1.08);
+  }
+  
+  .scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .scroll-button.left {
+    left: -40px; /* 왼쪽 버튼 위치 조정 */
+  }
+  
+  .scroll-button.right {
+    right: -40px; /* 오른쪽 버튼 위치 조정 */
+  }
+  
+  .scroll-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
   }
   
