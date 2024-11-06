@@ -38,23 +38,23 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 255, 0.5); /* 파란색 배경 */
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 100; /* z-index를 충분히 높게 설정 */
   }
   
   .scroll-button.left {
-    left: -40px; /* 왼쪽 버튼 위치 조정 */
+    left: 10px; /* 왼쪽 버튼 위치 조정 */
   }
   
   .scroll-button.right {
-    right: -40px; /* 오른쪽 버튼 위치 조정 */
+    right: 10px; /* 오른쪽 버튼 위치 조정 */
   }
   
   .scroll-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 255, 0.8); /* 호버 시 더 짙은 파란색 */
   }
   
