@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieRow from './components/MovieRow';
+import MovieRow from '../components/MovieRow';
 
 const Home = () => {
   const apiKey = 'YOUR_TMDB_API_KEY';
