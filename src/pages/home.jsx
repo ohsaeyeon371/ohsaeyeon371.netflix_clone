@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Banner from './components/banner.jsx';
+// import Banner from './components/banner.jsx';
 
 const Home = () => {
   const movie = {
