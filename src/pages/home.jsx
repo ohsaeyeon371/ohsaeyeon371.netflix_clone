@@ -4,7 +4,7 @@ import MovieRow from '../components/MovieRow';
 
 const Home = () => {
   const apiKey = 'a788b64a1e85b53d1f19cb4b6b728a66';
-  const baseUrl = 'https://api.themoviedb.org/3';
+  const baseUrl = 'https://a788b64a1e85b53d1f19cb4b6b728a66.themoviedb.org/3';
   const fetchUrl = `${baseUrl}/trending/movie/week?api_key=${apiKey}&language=ko-KR`;
 
   return (
