@@ -1,6 +1,7 @@
 import React from 'react';
-import Banner from '../components/Banner';
+import Banner from '../components/Banner.jsx';
 import MovieRow from '../components/MovieRow';
+import { API_URL, API_KEY } from '../config/config';
 
 const Home = () => {
   const apiKey = 'a788b64a1e85b53d1f19cb4b6b728a66';
