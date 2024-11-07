@@ -3,7 +3,7 @@ import Banner from '../components/Banner';
 import MovieRow from '../components/MovieRow';
 
 const Home = () => {
-  const apiKey = 'YOUR_TMDB_API_KEY';
+  const apiKey = 'a788b64a1e85b53d1f19cb4b6b728a66';
   const baseUrl = 'https://api.themoviedb.org/3';
   const fetchUrl = `${baseUrl}/trending/movie/week?api_key=${apiKey}&language=ko-KR`;
 
