@@ -1,0 +1,37 @@
+.wishlist {
+    padding: 20px;
+  }
+  
+  .wishlist__movies {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px 0;
+  }
+  
+  .wishlist__movie {
+    flex: 0 0 auto; /* 각 영화 요소를 가로로 나열 */
+    width: 200px;
+    text-align: center;
+  }
+  
+  .wishlist__poster {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+  
+  .wishlist__poster:hover {
+    transform: scale(1.05);
+  }
+  
+  .wishlist__title {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  

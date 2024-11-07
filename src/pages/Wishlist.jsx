@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Wishlist.css';
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
