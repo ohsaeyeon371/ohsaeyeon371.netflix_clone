@@ -38,6 +38,7 @@ const MovieRow = ({ title, fetchUrl }) => {
     alert(`${movie.title || movie.name}이(가) 찜 목록에 추가되었습니다.`);
   };
 
+
   return (
     <div className="movie-row">
       <h2>{title}</h2>

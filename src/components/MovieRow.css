@@ -4,7 +4,7 @@
   }
   
   .movie-row h2 {
-    color: white;
+    color: black;
     margin-left: 20px;
   }
   
@@ -56,5 +56,31 @@
   
   .scroll-button:hover {
     background-color: rgba(0, 0, 255, 0.8); /* 호버 시 더 짙은 파란색 */
+  }
+  
+  .movie-row__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 24px;
+    border-radius: 50%;
+  }
+  
+  .movie-row__arrow.left {
+    left: 0;
+  }
+  
+  .movie-row__arrow.right {
+    right: 0;
+  }
+  
+  .movie-row__arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
   }
   
