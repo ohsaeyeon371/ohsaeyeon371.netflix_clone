@@ -31,6 +31,13 @@ const MovieRow = ({ title, fetchUrl }) => {
     }
   };
 
+  const handleAddToWishlist = (movie) => {
+    const existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    const updatedWishlist = [...existingWishlist, movie];
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist)); // localStorage에 저장
+    alert(`${movie.title || movie.name}이(가) 찜 목록에 추가되었습니다.`);
+  };
+
   return (
     <div className="movie-row">
       <h2>{title}</h2>
@@ -51,6 +58,7 @@ const MovieRow = ({ title, fetchUrl }) => {
         <Modal
           movie={selectedMovie}
           onClose={() => setSelectedMovie(null)} // 모달 닫기 기능
+          onAddToWishlist={() => handleAddToWishlist(selectedMovie)} // 찜 기능
         />
       )}
     </div>

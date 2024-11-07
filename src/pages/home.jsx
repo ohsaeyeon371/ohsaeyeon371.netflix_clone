@@ -1,7 +1,7 @@
 import React from 'react';
 import Banner from '../components/Banner';
 import MovieRow from '../components/MovieRow';
-import { API_URL, API_KEY } from '../config/config'; // config.js에서 가져오기
+import { API_URL, API_KEY } from '../config/config'; 
 
 const Home = () => {
   return (
