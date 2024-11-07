@@ -3,16 +3,15 @@
   }
   
   .wishlist__movies {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 20px;
-    padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px; /* 포스터 간의 일정한 간격 */
+    justify-items: center;
   }
   
   .wishlist__movie {
-    flex: 0 0 auto; /* 각 영화 요소를 가로로 나열 */
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
     text-align: center;
   }
   
