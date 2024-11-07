@@ -4,19 +4,19 @@
   
   .wishlist__movies {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px; /* 포스터 간의 일정한 간격 */
+    grid-template-columns: repeat(5, 1fr); /* 가로로 5개의 포스터만 배치 */
+    gap: 15px; /* 포스터 간의 일정한 간격 */
     justify-items: center;
   }
   
   .wishlist__movie {
     width: 100%;
-    max-width: 200px;
+    max-width: 180px; /* 최대 너비 설정 */
     text-align: center;
   }
   
   .wishlist__poster {
-    width: 100%;
+    width: 100%; /* 포스터가 셀의 너비에 맞게 조정됨 */
     border-radius: 8px;
     transition: transform 0.3s;
   }
@@ -26,8 +26,8 @@
   }
   
   .wishlist__title {
-    margin-top: 10px;
-    font-size: 1rem;
+    margin-top: 8px; /* 간격 조정 */
+    font-size: 0.9rem; /* 텍스트 크기 약간 줄임 */
     color: #333;
     text-overflow: ellipsis;
     overflow: hidden;
