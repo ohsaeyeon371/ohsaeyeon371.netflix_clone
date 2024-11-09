@@ -1,0 +1,80 @@
+.popular {
+    padding: 20px;
+    position: relative;
+  }
+  
+  .popular__controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .arrow {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .arrow:hover {
+    color: #e50914;
+  }
+  
+  .popular__container {
+    display: flex;
+    gap: 20px;
+    overflow: hidden; /* 가로 스크롤바를 숨김 */
+  }
+  
+  .popular__movie {
+    position: relative;
+    flex: 0 0 auto;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .popular__rank {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 3rem; /* 순위 표시 크기 조정 */
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    z-index: 1;
+  }
+  
+  .popular__poster {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+  
+  .popular__poster:hover {
+    transform: scale(1.05);
+  }
+  
+  .popular__info {
+    margin-top: 10px;
+  }
+  
+  .popular__title {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  
+  .popular__button {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .popular__button:hover {
+    background-color: #b20710;
+  }
+  

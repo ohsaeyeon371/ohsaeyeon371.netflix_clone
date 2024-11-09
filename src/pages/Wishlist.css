@@ -1,36 +1,45 @@
 .wishlist {
-    padding: 20px;
-  }
-  
-  .wishlist__movies {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 가로로 5개의 포스터만 배치 */
-    gap: 15px; /* 포스터 간의 일정한 간격 */
-    justify-items: center;
-  }
-  
-  .wishlist__movie {
-    width: 100%;
-    max-width: 180px; /* 최대 너비 설정 */
-    text-align: center;
-  }
-  
-  .wishlist__poster {
-    width: 100%; /* 포스터가 셀의 너비에 맞게 조정됨 */
-    border-radius: 8px;
-    transition: transform 0.3s;
-  }
-  
-  .wishlist__poster:hover {
-    transform: scale(1.05);
-  }
-  
-  .wishlist__title {
-    margin-top: 8px; /* 간격 조정 */
-    font-size: 0.9rem; /* 텍스트 크기 약간 줄임 */
-    color: #333;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  
+  padding: 20px;
+  color: #fff;
+}
+
+.wishlist h2 {
+  margin-bottom: 20px;
+}
+
+.wishlist__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.wishlist__item {
+  position: relative;
+}
+
+.wishlist__poster {
+  width: 100%;
+  border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.wishlist__poster:hover {
+  transform: scale(1.05);
+}
+
+.wishlist__remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.wishlist__remove-button:hover {
+  background-color: rgba(255, 0, 0, 0.7);
+}
