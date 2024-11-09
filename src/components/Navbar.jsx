@@ -1,16 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import './Navbar.css';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <nav className="navbar">
-      <ul className="navbar__menu">
-        <li><Link to="/">홈</Link></li>
-        <li><Link to="/popular">New!대세 콘텐츠</Link></li>
-        <li><Link to="/search">찾아보기</Link></li>
-        <li><Link to="/wishlist">내가 찜한 리스트</Link></li>
-      </ul>
+      <div className="navbar__logo">로고</div>
+      <div className={`navbar__menu ${isMenuOpen ? 'navbar__menu--open' : ''}`}>
+        <ul>
+          <li>홈</li>
+          <li>시리즈</li>
+          <li>영화</li>
+          <li>NEW! 요즘 대세 콘텐츠</li>
+          <li>내가 찜한 리스트</li>
+        </ul>
+      </div>
+      <button className="navbar__toggle" onClick={toggleMenu}>
+        ☰
+      </button>
     </nav>
   );
 };
