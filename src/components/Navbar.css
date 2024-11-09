@@ -1,0 +1,80 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #141414;
+    color: white;
+  }
+  
+  .navbar__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navbar__menu {
+    display: flex;
+    gap: 15px; /* 메뉴 간의 간격 */
+    list-style: none; /* 앞에 있는 점 제거 */
+    padding: 0; /* 리스트의 기본 패딩 제거 */
+    margin: 0; /* 리스트의 기본 마진 제거 */
+  }
+  
+  .navbar__menu ul {
+    display: flex;
+    gap: 15px; /* 메뉴 간의 간격 */
+    list-style: none; /* 앞에 있는 점 제거 */
+    padding: 0; /* 리스트의 기본 패딩 제거 */
+    margin: 0; /* 리스트의 기본 마진 제거 */
+  }
+  
+  .navbar__menu li {
+    cursor: pointer;
+  }
+  
+  .navbar__toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar__menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      background-color: #141414;
+      border-radius: 5px;
+      padding: 10px;
+      width: 200px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+  
+    .navbar__menu--open {
+      display: block;
+    }
+  
+    .navbar__menu ul {
+      flex-direction: column;
+      gap: 10px; /* 메뉴 간의 간격 */
+    }
+  
+    .navbar__menu li {
+      padding: 10px 0;
+      border-bottom: 1px solid #333;
+    }
+  
+    .navbar__menu li:last-child {
+      border-bottom: none;
+    }
+  
+    .navbar__toggle {
+      display: block;
+    }
+  }
+  
