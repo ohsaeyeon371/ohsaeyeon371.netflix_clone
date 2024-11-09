@@ -1,54 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Wishlist.css';
-import Modal from '../components/Modal'; // Modal 컴포넌트 import
 
-const Wishlist = () => {
-  const [wishlist, setWishlist] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null); // 선택된 영화 상태
+const Wishlist = ({ wishlist = [], onRemoveFromWishlist }) => { // 기본값으로 빈 배열 설정
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-  useEffect(() => {
-    const storedWishlist = localStorage.getItem('wishlist');
-    if (storedWishlist) {
-      setWishlist(JSON.parse(storedWishlist));
-    }
-  }, []);
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(wishlist.length / itemsPerPage);
 
-  const handlePosterClick = (movie) => {
-    setSelectedMovie(movie); // 포스터 클릭 시 영화 정보 설정
-  };
+  // Get current items for the page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = wishlist.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handleRemoveFromWishlist = (movieId) => {
-    const updatedWishlist = wishlist.filter((item) => item.id !== movieId);
-    setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
-    setSelectedMovie(null); // 모달을 닫음
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
     <div className="wishlist">
-      <h2>내가 찜한 영화</h2>
-      <div className="wishlist__movies">
-        {wishlist.length > 0 ? (
-          wishlist.map((movie) => (
-            <div key={movie.id} className="wishlist__movie" onClick={() => handlePosterClick(movie)}>
+      <h2>내가 찜한 리스트</h2>
+      <div className="wishlist__grid">
+        {currentItems.length === 0 ? (
+          <p>찜한 영화가 없습니다.</p>
+        ) : (
+          currentItems.map((movie) => (
+            <div key={movie.id} className="wishlist__item">
               <img
+                className="wishlist__poster"
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt={movie.title || movie.name}
               />
-              <h3>{movie.title || movie.name}</h3>
+              <button onClick={() => onRemoveFromWishlist(movie.id)} className="wishlist__remove-button">
+                찜 취소
+              </button>
             </div>
           ))
-        ) : (
-          <p>찜한 영화가 없습니다.</p>
         )}
       </div>
-      {selectedMovie && (
-        <Modal
-          movie={selectedMovie}
-          onClose={() => setSelectedMovie(null)} // 모달 닫기 기능
-          onRemoveFromWishlist={handleRemoveFromWishlist}
-          isInWishlist={true} // Wishlist에서 실행되므로 항상 true
-        />
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="wishlist__pagination">
+          {[...Array(totalPages).keys()].map((page) => (
+            <button
+              key={page + 1}
+              onClick={() => handlePageChange(page + 1)}
+              className={`wishlist__page-button ${currentPage === page + 1 ? 'active' : ''}`}
+            >
+              {page + 1}
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );
