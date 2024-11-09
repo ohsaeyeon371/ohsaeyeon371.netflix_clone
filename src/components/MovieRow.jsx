@@ -9,6 +9,15 @@ const MovieRow = ({ title, fetchUrl }) => {
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택된 영화 정보 상태
   const sliderRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [wishlist, setWishlist] = useState([]);
+
+  useEffect(() => {
+    // localStorage에서 찜 목록 불러오기
+    const storedWishlist = localStorage.getItem('wishlist');
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist));
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,27 +36,46 @@ const MovieRow = ({ title, fetchUrl }) => {
     setSelectedMovie(movie);
   };
 
+  const handleAddToWishlist = (movie) => {
+    const updatedWishlist = [...wishlist, movie];
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
+  const handleRemoveFromWishlist = (movieId) => {
+    const updatedWishlist = wishlist.filter((item) => item.id !== movieId);
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+  
   const handleScroll = (direction) => {
     const slider = sliderRef.current;
-    const visibleWidth = slider.clientWidth; // 현재 보여지는 영역의 너비
-    const totalWidth = slider.scrollWidth; // 전체 슬라이더의 너비
+    const scrollAmount = 300; // 한 번에 스크롤할 픽셀 수
 
-    let newScrollPosition;
     if (direction === 'left') {
-      newScrollPosition = scrollPosition - visibleWidth; // 한 번에 보이는 영역만큼 왼쪽으로 스크롤
+      setScrollPosition((prevPosition) => {
+        const newPosition = Math.max(prevPosition - scrollAmount, 0);
+        slider.scrollTo({
+          left: newPosition,
+          behavior: 'smooth',
+        });
+        return newPosition;
+      });
     } else {
-      newScrollPosition = scrollPosition + visibleWidth; // 한 번에 보이는 영역만큼 오른쪽으로 스크롤
+      setScrollPosition((prevPosition) => {
+        const newPosition = Math.min(
+          prevPosition + scrollAmount,
+          slider.scrollWidth - slider.clientWidth
+        );
+        slider.scrollTo({
+          left: newPosition,
+          behavior: 'smooth',
+        });
+        return newPosition;
+      });
     }
-
-    // 스크롤 위치가 최대값을 초과하지 않도록 제한
-    newScrollPosition = Math.max(0, Math.min(newScrollPosition, totalWidth - visibleWidth));
-
-    setScrollPosition(newScrollPosition);
-    slider.scrollTo({
-      left: newScrollPosition,
-      behavior: 'smooth'
-    });
   };
+
 
   return (
     <div className="movie-row">
@@ -71,6 +99,9 @@ const MovieRow = ({ title, fetchUrl }) => {
         <Modal
           movie={selectedMovie}
           onClose={() => setSelectedMovie(null)} // 모달 닫기 기능
+          onAddToWishlist={handleAddToWishlist}
+          onRemoveFromWishlist={handleRemoveFromWishlist}
+          isInWishlist={wishlist.some((item) => item.id === selectedMovie.id)}
         />
       )}
     </div>

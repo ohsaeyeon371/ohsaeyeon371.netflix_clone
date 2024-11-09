@@ -1,32 +1,29 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-const NavContainer = styled.nav`
-  background-color: #141414;
-  padding: 10px;
-  display: flex;
-  justify-content: space-around;
-  color: white;
-`;
-
-const NavItem = styled(Link)`
-  text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+import React, { useState } from 'react';
+import './Navbar.css';
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <NavContainer>
-      <NavItem to="/">Home</NavItem>
-      <NavItem to="/popular">Popular</NavItem>
-      <NavItem to="/search">Search</NavItem>
-      <NavItem to="/wishlist">Wishlist</NavItem>
-    </NavContainer>
+    <nav className="navbar">
+      <div className="navbar__logo">로고</div>
+      <div className={`navbar__menu ${isMenuOpen ? 'navbar__menu--open' : ''}`}>
+        <ul>
+          <li>홈</li>
+          <li>시리즈</li>
+          <li>영화</li>
+          <li>NEW! 요즘 대세 콘텐츠</li>
+          <li>내가 찜한 리스트</li>
+        </ul>
+      </div>
+      <button className="navbar__toggle" onClick={toggleMenu}>
+        ☰
+      </button>
+    </nav>
   );
 };
 
