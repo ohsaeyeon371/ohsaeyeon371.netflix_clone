@@ -19,7 +19,13 @@ const Modal = ({ movie, onClose, onAddToWishlist, onRemoveFromWishlist, isInWish
           <div className="modal__buttons">
             <button className="modal__button">재생</button>
             {isInWishlist ? (
-              <button className="modal__button modal__button--active" onClick={() => onRemoveFromWishlist(movie.id)}>
+              <button
+                className="modal__button modal__button--active"
+                onClick={() => {
+                  onRemoveFromWishlist(movie.id);
+                  onClose(); // 모달 닫기
+                }}
+              >
                 찜됨
               </button>
             ) : (

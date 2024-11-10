@@ -1,21 +1,53 @@
-.search-page {
-    padding: 20px;
-    color: white;
-  }
-  
-  .search-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .search-form select,
-  .search-form button {
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  .search-results {
-    margin-top: 20px;
-  }
-  
+.dropdown-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+.select-selected {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.select-items {
+  display: block;
+  position: absolute;
+  background-color: #333;
+  border: 1px solid #fff;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.select-items div {
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.select-items div:hover {
+  background-color: #575757;
+}
+
+.clear-options {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.clear-options:hover {
+  background-color: #333;
+}
