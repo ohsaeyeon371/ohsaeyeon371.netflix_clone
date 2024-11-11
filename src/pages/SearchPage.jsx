@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import MovieRow from '../components/MovieRow';
-// import SearchForm from '../components/SearchForm';
 import './SearchPage.css';
+import MovieRow from '../components/MovieRow'; // 영화 리스트 컴포넌트
 import { API_URL, API_KEY } from '../config/config';
 
 const SearchPage = () => {
@@ -13,14 +12,18 @@ const SearchPage = () => {
   const [movies, setMovies] = useState([]);
 
   const handleSearch = async () => {
-    let query = `${API_URL}/discover/movie?api_key=${API_KEY}&language=ko-KR&sort_by=${sort}`;
+    let query = `${API_URL}movie/discover?api_key=${API_KEY}&language=ko-KR`;
 
-    if (genre) query += `&with_genres=${genre}`;
+    if (genre) {
+      console.log('Selected genre:', genre); // 선택된 장르 코드 확인
+      query += `&with_genres=${genre}`;
+    }
     if (rating) query += `&vote_average.gte=${rating}`;
     if (language) query += `&with_original_language=${language}`;
 
     try {
       const response = await axios.get(query);
+      console.log('API response:', response.data); // API 응답 확인
       setMovies(response.data.results);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -59,7 +62,6 @@ const SearchPage = () => {
           <option value="">언어 (전체)</option>
           <option value="en">영어</option>
           <option value="ko">한국어</option>
-          <option value="ja">일본어</option>
         </select>
         <select value={sort} onChange={(e) => setSort(e.target.value)}>
           <option value="popularity.desc">인기순</option>
@@ -81,12 +83,3 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
-
-
-
-
-
-
-
-
-
