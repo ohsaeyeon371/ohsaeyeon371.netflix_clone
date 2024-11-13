@@ -86,3 +86,13 @@
     }
   }
   
+  .user-icon {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    transition: color 0.3s;
+  }
+  
+  .user-icon:hover {
+    color: #ddd;
+  }

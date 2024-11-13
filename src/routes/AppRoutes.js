@@ -12,6 +12,8 @@ const AppRoutes = () => {
       <Route path="/popular" element={<Popular />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/wishlist" element={<Wishlist />} />
+      {/* <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} /> */}
     </Routes>
   );
 };
