@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+
 import axios from 'axios';
 import './SearchPage.css';
 import { API_URL, API_KEY } from '../config/config';
+import React, { useState, useEffect } from 'react';
+
 
 const SearchPage = () => {
   const initialGenre = '';
@@ -12,17 +14,34 @@ const SearchPage = () => {
   const [sort, setSort] = useState('popularity.desc');
   const [movies, setMovies] = useState([]);
 
+    // 초기 로딩 시 영화 데이터 가져오기
+  useEffect(() => {
+    const fetchInitialMovies = async () => {
+      try {
+        const response = await axios.get(
+          `${API_URL}discover/movie?api_key=${API_KEY}&language=ko-KR&sort_by=popularity.desc`
+        );
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error('Error fetching initial movies:', error);
+      }
+    };
+
+    fetchInitialMovies();
+  }, []);
   
   // 초기화 함수
   const resetFilters = () => {
     setGenre(initialGenre);
     setRating(initialRating);
   };
+
   const handleSearch = async () => {
     let query = `${API_URL}discover/movie?api_key=${API_KEY}&language=ko-KR`;
 
     if (genre) query += `&with_genres=${genre}`;
     if (rating) query += `&vote_average.gte=${rating}`;
+    query += `&sort_by=${sort}`;
 
     try {
       const response = await axios.get(query);
