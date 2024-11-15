@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
@@ -15,7 +15,7 @@ const Login = () => {
       const response = await axios.post('/api/login', { email, password });
       if (response.data.success) {
         alert('로그인 성공!');
-        navigate('/'); // 로그인 성공 시 홈으로 이동
+        navigate('/');
       } else {
         alert('로그인 실패: ' + response.data.message);
       }
@@ -33,24 +33,26 @@ const Login = () => {
         <input
           type="email"
           id="email"
-          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        
+
         <label htmlFor="password">비밀번호:</label>
         <input
           type="password"
           id="password"
-          name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        
-        <button type="submit">로그인</button>
+
+        <button type="submit" className="login-button">로그인</button>
       </form>
+      <div className="register-link">
+        <p>계정이 없으신가요?</p>
+        <Link to="/register" className="register-button">회원가입</Link>
+      </div>
     </div>
   );
 };
