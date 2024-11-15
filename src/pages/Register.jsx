@@ -7,6 +7,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -18,7 +19,12 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('/api/register', { email, password });
+      const response = await axios.post('/api/register', {
+        email,
+        password,
+        name,
+      });
+
       if (response.data.success) {
         alert('회원가입 성공!');
         navigate('/login'); // 회원가입 후 로그인 페이지로 이동
@@ -35,11 +41,19 @@ const Register = () => {
     <div className="register-page">
       <h2>회원가입</h2>
       <form onSubmit={handleRegister}>
+        <label htmlFor="name">이름:</label>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+
         <label htmlFor="email">이메일:</label>
         <input
           type="email"
           id="email"
-          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -49,7 +63,6 @@ const Register = () => {
         <input
           type="password"
           id="password"
-          name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -59,13 +72,12 @@ const Register = () => {
         <input
           type="password"
           id="confirmPassword"
-          name="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
 
-        <button type="submit">회원가입</button>
+        <button type="submit" className="register-button">회원가입</button>
       </form>
     </div>
   );
