@@ -4,10 +4,20 @@ import './SearchPage.css';
 import { API_URL, API_KEY } from '../config/config';
 
 const SearchPage = () => {
-  const [genre, setGenre] = useState('');
-  const [rating, setRating] = useState('');
+  const initialGenre = '';
+  const initialRating = 0;
+
+  const [genre, setGenre] = useState('initialGenre');
+  const [rating, setRating] = useState('initialGenre');
+  const [sort, setSort] = useState('popularity.desc');
   const [movies, setMovies] = useState([]);
 
+  
+  // 초기화 함수
+  const resetFilters = () => {
+    setGenre(initialGenre);
+    setRating(initialRating);
+  };
   const handleSearch = async () => {
     let query = `${API_URL}discover/movie?api_key=${API_KEY}&language=ko-KR`;
 
@@ -36,12 +46,18 @@ const SearchPage = () => {
         </select>
         <select value={rating} onChange={(e) => setRating(e.target.value)}>
           <option value="">평점 (전체)</option>
-          <option value="9">9점 이상</option>
-          <option value="8">8점 이상</option>
-          <option value="7">7점 이상</option>
-          <option value="6">6점 이상</option>
-          <option value="5">5점 이상</option>
+          <option value="9">9~10</option>
+          <option value="8">8~9</option>
+          <option value="7">7~8</option>
+          <option value="6">6~7</option>
+          <option value="5">5~6</option>
         </select>
+        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+          <option value="popularity.desc">인기순</option>
+          <option value="release_date.desc">최신 개봉일순</option>
+          <option value="vote_average.desc">평점 높은순</option>
+        </select>
+        <button onClick={resetFilters}>초기화</button>
         <button onClick={handleSearch}>검색</button>
       </div>
       <div className="search-results">
