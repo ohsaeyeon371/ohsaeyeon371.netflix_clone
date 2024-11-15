@@ -5,6 +5,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .register-page h2 {
@@ -19,6 +20,7 @@
   
   .register-page label {
     margin-bottom: 5px;
+    font-weight: bold;
   }
   
   .register-page input {
@@ -28,16 +30,16 @@
     border-radius: 5px;
   }
   
-  .register-page button {
+  .register-page .register-button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
-  .register-page button:hover {
-    background-color: #0056b3;
+  .register-page .register-button:hover {
+    background-color: #218838;
   }
   
