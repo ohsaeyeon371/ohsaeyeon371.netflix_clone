@@ -3,11 +3,13 @@ import axios from 'axios';
 import './Popular.css';
 import { API_URL, API_KEY } from '../config/config';
 import Modal from '../components/Modal'; // Modal 컴포넌트 import
+import Loading from '../components/Loading';
 
 const Popular = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택된 영화 상태
   const sliderRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true); // 로딩 상태 추가
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,13 +18,19 @@ const Popular = () => {
           `${API_URL}movie/popular?api_key=${API_KEY}&language=ko-KR`
         );
         setMovies(response.data.results);
+        setIsLoading(false); // 데이터 불러온 후 로딩 상태 해제
       } catch (error) {
         console.error('Error fetching popular movies:', error);
+        setIsLoading(false); // 에러 발생 시 로딩 상태 해제
       }
     };
 
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return <Loading />; // 로딩 중일 때 로딩 컴포넌트 렌더링
+  }
 
   const handleScroll = (direction) => {
     if (sliderRef.current) {
