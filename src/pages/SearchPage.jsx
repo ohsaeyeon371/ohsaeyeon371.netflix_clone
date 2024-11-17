@@ -1,8 +1,9 @@
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SearchPage.css';
 import { API_URL, API_KEY } from '../config/config';
-import React, { useState, useEffect } from 'react';
-import Loading from '../components/Loading'; // Loading 컴포넌트 import
+import Modal from '../components/Modal';
+import Loading from '../components/Loading';
 
 const SearchPage = () => {
   const initialGenre = '';
@@ -12,28 +13,38 @@ const SearchPage = () => {
   const [rating, setRating] = useState(initialRating);
   const [sort, setSort] = useState('popularity.desc');
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [wishlist, setWishlist] = useState([]);
 
-  // 초기 로딩 시 영화 데이터 가져오기
   useEffect(() => {
-    const fetchInitialMovies = async () => {
-      try {
-        setIsLoading(true); // 로딩 시작
-        const response = await axios.get(
-          `${API_URL}discover/movie?api_key=${API_KEY}&language=ko-KR&sort_by=popularity.desc`
-        );
-        setMovies(response.data.results);
-      } catch (error) {
-        console.error('Error fetching initial movies:', error);
-      } finally {
-        setIsLoading(false); // 로딩 완료
-      }
-    };
-
-    fetchInitialMovies();
+    const storedWishlist = localStorage.getItem('wishlist');
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist));
+    }
   }, []);
 
-  // 초기화 함수
+  const handleAddToWishlist = (movie) => {
+    const updatedWishlist = [...wishlist, movie];
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
+  const handlePosterClick = async (movie) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}movie/${movie.id}?api_key=${API_KEY}&language=ko-KR`
+      );
+      setSelectedMovie(response.data);
+    } catch (error) {
+      console.error('Error fetching movie details:', error);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
+  };
+
   const resetFilters = () => {
     setGenre(initialGenre);
     setRating(initialRating);
@@ -41,7 +52,7 @@ const SearchPage = () => {
   };
 
   const handleSearch = async () => {
-    setIsLoading(true); // 로딩 시작
+    setIsLoading(true);
     let query = `${API_URL}discover/movie?api_key=${API_KEY}&language=ko-KR`;
 
     if (genre) query += `&with_genres=${genre}`;
@@ -54,7 +65,7 @@ const SearchPage = () => {
     } catch (error) {
       console.error('Error fetching movies:', error);
     } finally {
-      setIsLoading(false); // 로딩 완료
+      setIsLoading(false);
     }
   };
 
@@ -87,13 +98,17 @@ const SearchPage = () => {
         <button onClick={handleSearch}>검색</button>
       </div>
       {isLoading ? (
-        <Loading /> // 로딩 상태일 때 Loading 컴포넌트 표시
+        <Loading />
       ) : (
         <div className="search-results">
           {movies.length > 0 ? (
             <div className="movie-grid">
               {movies.map((movie) => (
-                <div key={movie.id} className="movie-item">
+                <div
+                  key={movie.id}
+                  className="movie-item"
+                  onClick={() => handlePosterClick(movie)}
+                >
                   <img
                     src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                     alt={movie.title || movie.name}
@@ -108,6 +123,14 @@ const SearchPage = () => {
             <p>옵션을 선택하고 검색하세요.</p>
           )}
         </div>
+      )}
+      {selectedMovie && (
+        <Modal
+          movie={selectedMovie}
+          onClose={handleCloseModal}
+          onAddToWishlist={handleAddToWishlist} // 함수 전달
+          isInWishlist={wishlist.some((item) => item.id === selectedMovie.id)}
+        />
       )}
     </div>
   );
