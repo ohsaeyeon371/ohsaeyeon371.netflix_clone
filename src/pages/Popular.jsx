@@ -8,6 +8,7 @@ import Loading from '../components/Loading'; // Loading 컴포넌트 import
 const Popular = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택된 영화 상태
+  const [wishlist, setWishlist] = useState([]); // 찜 목록 상태
   const sliderRef = useRef(null);
   const [isPageLoading, setIsPageLoading] = useState(true); // 페이지 전체 로딩 상태
 
@@ -28,6 +29,18 @@ const Popular = () => {
 
     fetchData();
   }, []);
+
+  const handleAddToWishlist = (movie) => {
+    const updatedWishlist = [...wishlist, movie];
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
+
+  const handleRemoveFromWishlist = (movieId) => {
+    const updatedWishlist = wishlist.filter((movie) => movie.id !== movieId);
+    setWishlist(updatedWishlist);
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  };
 
   const handleScroll = (direction) => {
     if (sliderRef.current) {
@@ -78,6 +91,9 @@ const Popular = () => {
         <Modal
           movie={selectedMovie}
           onClose={() => setSelectedMovie(null)} // 모달 닫기 기능
+          onAddToWishlist={handleAddToWishlist} // 찜 추가 기능 전달
+          onRemoveFromWishlist={handleRemoveFromWishlist} // 찜 제거 기능 전달
+          isInWishlist={wishlist.some((item) => item.id === selectedMovie.id)} // 찜 상태 확인
         />
       )}
     </div>
