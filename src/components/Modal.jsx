@@ -23,7 +23,7 @@ const Modal = ({ movie, onClose, onAddToWishlist, onRemoveFromWishlist, isInWish
                 className="modal__button modal__button--active"
                 onClick={() => {
                   onRemoveFromWishlist(movie.id);
-                  onClose(); // 모달 닫기
+                  // onClose(); // 모달 닫기
                 }}
               >
                 찜됨

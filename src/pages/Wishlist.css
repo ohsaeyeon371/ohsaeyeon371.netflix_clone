@@ -86,3 +86,31 @@
   font-size: 1rem; /* 제목 크기 */
   margin-top: 10px; /* 제목 위 여백 */
 }
+
+.wishlist {
+  padding: 20px;
+}
+
+.wishlist__movies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* 포스터 간의 간격 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+.wishlist__movie {
+  flex: 0 0 auto; /* 고정된 너비를 유지 */
+}
+
+.wishlist__movie img {
+  width: 200px; /* 고정된 너비 */
+  height: 300px; /* 고정된 높이 */
+  object-fit: cover; /* 이미지가 프레임을 채우면서 비율 유지 */
+  border-radius: 10px;
+}
+
+.wishlist__movie h3 {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: center;
+}
