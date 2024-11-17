@@ -12,6 +12,14 @@ const Popular = () => {
   const sliderRef = useRef(null);
   const [isPageLoading, setIsPageLoading] = useState(true); // 페이지 전체 로딩 상태
 
+  // 컴포넌트가 마운트될 때 localStorage에서 wishlist 불러오기
+  useEffect(() => {
+    const storedWishlist = localStorage.getItem('wishlist');
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist));
+    }
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,9 +39,12 @@ const Popular = () => {
   }, []);
 
   const handleAddToWishlist = (movie) => {
-    const updatedWishlist = [...wishlist, movie];
-    setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+    // 중복 확인 후 추가
+    if (!wishlist.some((item) => item.id === movie.id)) {
+      const updatedWishlist = [...wishlist, movie];
+      setWishlist(updatedWishlist);
+      localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+    }
   };
 
   const handleRemoveFromWishlist = (movieId) => {
