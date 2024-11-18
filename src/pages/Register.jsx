@@ -19,15 +19,24 @@ const Register = () => {
     }
 
     try {
+<<<<<<< HEAD
+      const response = await axios.post('/api/register', {
+=======
       const response = await axios.post('http://localhost:5000/api/register', {
         // 서버 URL을 정확하게 명시
+>>>>>>> 373df204ff398588985a7d479f28aecfb3270dad
         email,
         password,
         name,
       });
+<<<<<<< HEAD
+
+      if (response.data.success) {
+=======
       
 
       if (response.status === 201 || response.data.success) {
+>>>>>>> 373df204ff398588985a7d479f28aecfb3270dad
         alert('회원가입 성공!');
         navigate('/login');
       } else {
@@ -45,6 +54,45 @@ const Register = () => {
     <div className="register-container">
       <h2>회원가입</h2>
       <form onSubmit={handleRegister}>
+<<<<<<< HEAD
+        <label htmlFor="name">이름:</label>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+
+        <label htmlFor="email">이메일:</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        <label htmlFor="password">비밀번호:</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <label htmlFor="confirmPassword">비밀번호 확인:</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit" className="register-button">회원가입</button>
+=======
         <div className="form-group">
           <label>이름</label>
           <input
@@ -82,6 +130,7 @@ const Register = () => {
           />
         </div>
         <button type="submit">회원가입</button>
+>>>>>>> 373df204ff398588985a7d479f28aecfb3270dad
       </form>
     </div>
   );
