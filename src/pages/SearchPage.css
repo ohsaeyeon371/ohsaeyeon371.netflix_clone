@@ -4,30 +4,47 @@
 
 .dropdown-container {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 20px;
 }
 
-button {
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.search-results {
-  margin-top: 20px;
-}
-
 .movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .movie-item {
-  text-align: center;
+  flex: 0 1 calc(20% - 20px); /* 포스터 크기 */
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.movie-item:hover {
+  transform: translateY(-5px); /* 마우스 오버 시 위로 살짝 올라가는 효과 */
 }
 
 .movie-poster {
   width: 100%;
-  border-radius: 8px;
+  height: 100%; /* 컨테이너에 맞추기 */
+  object-fit: contain; /* 이미지 비율 유지하며 전체 표시 */
+  border-bottom: 1px solid #ddd;
+}
+
+.movie-item h3 {
+  font-size: 16px;
+  margin: 10px;
+  text-align: center;
+}
+
+.movie-item p {
+  font-size: 14px;
+  margin: 0 10px 10px;
+  text-align: center;
+  color: #555; /* 텍스트 색상 변경 */
 }
