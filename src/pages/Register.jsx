@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './Register.css';
 
 const Register = () => {
@@ -10,7 +9,7 @@ const Register = () => {
   const [name, setName] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -18,27 +17,16 @@ const Register = () => {
       return;
     }
 
-    try {
-      const response = await axios.post('http://localhost:5000/api/register', {
-        // 서버 URL을 정확하게 명시
-        email,
-        password,
-        name,
-      });
-      
+    // 로컬 스토리지에 사용자 정보 저장
+    const userData = {
+      name,
+      email,
+      password, // 실제 서비스에서는 비밀번호를 평문으로 저장하지 않습니다. 암호화가 필요합니다.
+    };
+    localStorage.setItem('user', JSON.stringify(userData));
 
-      if (response.status === 201 || response.data.success) {
-        alert('회원가입 성공!');
-        navigate('/login');
-      } else {
-        alert('회원가입 실패: ' + (response.data.message || '알 수 없는 오류'));
-      }
-      
-    } catch (error) {
-      console.error('회원가입 오류:', error.response ? error.response.data : error.message);
-      alert('회원가입 중 오류가 발생했습니다.');
-    }
-    
+    alert('회원가입 성공!');
+    navigate('/login'); // 회원가입 후 로그인 페이지로 이동
   };
 
   return (
