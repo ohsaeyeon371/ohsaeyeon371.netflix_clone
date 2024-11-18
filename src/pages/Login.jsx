@@ -8,23 +8,21 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post('/api/login', { email, password });
-      if (response.data.success) {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userData = JSON.parse(storedUser);
+      if (userData.email === email && userData.password === password) {
         alert('로그인 성공!');
-        navigate('/');
+        navigate('/'); // 로그인 성공 시 홈 페이지로 이동
       } else {
-        alert('로그인 실패: ' + response.data.message);
+        alert('이메일 또는 비밀번호가 일치하지 않습니다.');
       }
-    } catch (error) {
-      console.error('로그인 오류:', error);
-      alert('로그인 중 오류가 발생했습니다.');
+    } else {
+      alert('등록된 사용자가 없습니다.');
     }
   };
-
   return (
     <div className="login-page">
       <h2>로그인</h2>
