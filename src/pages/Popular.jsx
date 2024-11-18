@@ -86,7 +86,7 @@ const Popular = () => {
       <div className="popular__container" ref={sliderRef}>
         {movies.map((movie, index) => (
           <div key={movie.id} className="popular__movie" onClick={() => handlePosterClick(movie)}>
-            <div className="popular__rank">{index + 1}</div>
+            <div className="popular__rank">{index + 1}</div> {/* 순위 표시 */}
             <img
               className="popular__poster"
               src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
